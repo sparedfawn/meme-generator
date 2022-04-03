@@ -4,7 +4,7 @@ interface Props {
     meme: {
         topText: string;
         bottomText: string;
-        randomImageId: number;
+        imageId: number;
     };
     handleTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     getMeme: () => void;

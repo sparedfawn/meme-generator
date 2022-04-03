@@ -3,13 +3,13 @@ import axios from "axios";
 
 import MemeForm from "./MemeForm";
 
-interface MemeState {
+interface Meme {
     topText: string;
     bottomText: string;
-    randomImageId: number;
+    imageId: number;
 }
 
-interface MemeData {
+interface TemplateData {
     id: string;
     name: string;
     url: string;
@@ -19,11 +19,11 @@ interface MemeData {
 }
 
 const Meme: React.FC = () => {
-    const [allMemeData, setAllMemeData] = useState<Array<MemeData>>([]);
-    const [meme, setMeme] = useState<MemeState>({
+    const [allTemplatesData, setAllTemplatesData] = useState<Array<TemplateData>>([]);
+    const [meme, setMeme] = useState<Meme>({
         topText: "",
         bottomText: "",
-        randomImageId: 0,
+        imageId: 0,
     });
 
     useEffect(() => {
@@ -31,24 +31,24 @@ const Meme: React.FC = () => {
             .get("https://api.imgflip.com/get_memes")
             .then((response) => response.status === 200 && response.data)
             .then((data) => {
-                setAllMemeData(data.data.memes);
+                setAllTemplatesData(data.data.memes);
                 const random = Math.floor(
                     Math.random() * data.data.memes.length
                 );
                 setMeme({
                     topText: "",
                     bottomText: "",
-                    randomImageId: random,
+                    imageId: random,
                 });
             });
     }, []);
 
-    const getMeme = () => {
-        const random = Math.floor(Math.random() * allMemeData.length);
+    const changeTemplate = () => {
+        const random = Math.floor(Math.random() * allTemplatesData.length);
         setMeme((prevMeme) => {
             return {
                 ...prevMeme,
-                randomImageId: random,
+                imageId: random,
             };
         });
     };
@@ -68,11 +68,11 @@ const Meme: React.FC = () => {
             <MemeForm
                 meme={meme}
                 handleTextChange={handleTextChange}
-                getMeme={getMeme}
+                getMeme={changeTemplate}
             />
             <div className="meme">
                 <img
-                    src={allMemeData[meme.randomImageId]?.url}
+                    src={allTemplatesData[meme.imageId]?.url}
                     className="meme-image"
                 />
 
