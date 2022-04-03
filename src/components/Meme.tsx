@@ -6,7 +6,7 @@ import MemeForm from "./MemeForm";
 interface Meme {
     topText: string;
     bottomText: string;
-    imageId: number;
+    templateId: number;
 }
 
 interface TemplateData {
@@ -23,7 +23,7 @@ const Meme: React.FC = () => {
     const [meme, setMeme] = useState<Meme>({
         topText: "",
         bottomText: "",
-        imageId: 0,
+        templateId: 0,
     });
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const Meme: React.FC = () => {
                 setMeme({
                     topText: "",
                     bottomText: "",
-                    imageId: random,
+                    templateId: random,
                 });
             });
     }, []);
@@ -48,7 +48,7 @@ const Meme: React.FC = () => {
         setMeme((prevMeme) => {
             return {
                 ...prevMeme,
-                imageId: random,
+                templateId: random,
             };
         });
     };
@@ -68,11 +68,11 @@ const Meme: React.FC = () => {
             <MemeForm
                 meme={meme}
                 handleTextChange={handleTextChange}
-                getMeme={changeTemplate}
+                changeTemplate={changeTemplate}
             />
             <div className="meme">
                 <img
-                    src={allTemplatesData[meme.imageId]?.url}
+                    src={allTemplatesData[meme.templateId]?.url}
                     className="meme-image"
                 />
 

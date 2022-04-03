@@ -4,13 +4,13 @@ interface Props {
     meme: {
         topText: string;
         bottomText: string;
-        imageId: number;
+        templateId: number;
     };
     handleTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    getMeme: () => void;
+    changeTemplate: () => void;
 }
 
-const MemeForm: React.FC<Props> = ({ meme, handleTextChange, getMeme }) => {
+const MemeForm: React.FC<Props> = ({ meme, handleTextChange, changeTemplate }) => {
     return (
         <div className="form">
             <input
@@ -31,8 +31,8 @@ const MemeForm: React.FC<Props> = ({ meme, handleTextChange, getMeme }) => {
                 onChange={handleTextChange}
             />
 
-            <button className="form-button" onClick={getMeme}>
-                Get a new meme image 🖼
+            <button className="form-button" onClick={changeTemplate}>
+                Get a new meme template 🖼
             </button>
         </div>
     );
